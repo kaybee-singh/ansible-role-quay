@@ -1,0 +1,19 @@
+---
+- name: Configure Quay
+  hosts: all
+  become: yes
+  vars_prompt:
+    - name: username
+      prompt: "Enter the rhsm username"
+      private: no
+    - name: password
+      prompt: "Enter the rhsm password"
+      private: yes
+    - name: registryusername
+      prompt: "Enter the registry.redhat.io username"
+      private: no
+    - name: registrypassword
+      prompt: "Enter the registry.redhat.io  password"
+      private: yes
+  roles:
+    - role: quay-install 
