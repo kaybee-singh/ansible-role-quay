@@ -3,11 +3,11 @@
       community.general.redhat_subscription:
        username: "{{ username }}"
        password: "{{ password }}"
-         #    - name: Login to quay
-         #containers.podman.podman_login:
-         #username: "{{ registryusername }}"
-         #password: "{{ registrypassword }}"
-         #registry: registry.redhat.io
+    - name: Login to quay
+      containers.podman.podman_login:
+       username: "{{ registryusername }}"
+       password: "{{ registrypassword }}"
+       registry: registry.redhat.io
     - name: configuring firewall
       ansible.posix.firewalld:
         port: "{{ item }}"
@@ -56,6 +56,10 @@
         volumes:
           - /postgres-quay:/var/lib/pgsql/data:Z
         state: started
+    - name: Creating pg_trgm extension
+      ansible.builtin.shell:
+       cmd: |
+        podman exec -it postgresql-quay /bin/bash -c 'echo "CREATE EXTENSION IF NOT EXISTS pg_trgm" | psql -d quay -U postgres'
     - name: Starting the redis container
       containers.podman.podman_container:
         name: redis
