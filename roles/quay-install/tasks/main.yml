@@ -27,7 +27,7 @@
     - name: Make an /etc/hosts entry
       ansible.builtin.lineinfile:
        path: /etc/hosts
-       line: "{{ ansible_default_ipv4.address }} {{ ansible_fqdn }}"
+       line: "{{ ansible_default_ipv4.address }} {{ ansible_fqdn }} quay-all.example.com"
        state: present
     - name: Remove containers if they exist
       containers.podman.podman_container:
