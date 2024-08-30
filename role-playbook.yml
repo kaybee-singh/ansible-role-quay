@@ -1,6 +1,7 @@
 ---
 - name: Configure Quay
-  hosts: all
+  hosts: localhost
+  connection: local
   become: yes
   vars_prompt:
     - name: username
