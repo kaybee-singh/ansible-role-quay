@@ -8,7 +8,11 @@
        username: "{{ registryusername }}"
        password: "{{ registrypassword }}"
        registry: registry.redhat.io
-    - name: configuring firewall
+    - name: Start Firewalld
+      systemd:
+         name: firewalld
+         state: started
+    - name: configuring firewall    - name: configuring firewall
       ansible.posix.firewalld:
         port: "{{ item }}"
         permanent: yes
@@ -56,6 +60,9 @@
         volumes:
           - /postgres-quay:/var/lib/pgsql/data:Z
         state: started
+    - name: Wait for PostgreSQL container to initialize
+      pause:
+        seconds: 10
     - name: Creating pg_trgm extension
       ansible.builtin.shell:
        cmd: |
