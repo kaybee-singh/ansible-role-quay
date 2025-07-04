@@ -30,7 +30,7 @@ git clone https://github.com/kaybee-singh/ansible-role-quay /root/ansible-role-q
 4. Run the role 
 
 ```bash
-# ansible-playbook role-playbook.yml
+cd /root/ansible-role-quay;ansible-playbook role-playbook.yml
 ```
 5. After successfull execution of role quayserver will be accessible at `http://quay-all.example.com`. Make sure you have make in entry in `/etc/hosts` for `quay-all.example.com`
 
