@@ -12,7 +12,7 @@
       systemd:
          name: firewalld
          state: started
-    - name: configuring firewall    - name: configuring firewall
+    - name: configuring firewall
       ansible.posix.firewalld:
         port: "{{ item }}"
         permanent: yes
